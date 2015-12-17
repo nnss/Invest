@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Invests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Bank</th>
+      <th>Name</th>
+      <th>Amount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invests.each do |invest| %>
+      <tr>
+        <td><%= invest.user %></td>
+        <td><%= invest.bank %></td>
+        <td><%= invest.name %></td>
+        <td><%= invest.amount %></td>
+        <td><%= link_to 'Show', invest %></td>
+        <td><%= link_to 'Edit', edit_invest_path(invest) %></td>
+        <td><%= link_to 'Destroy', invest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Invest', new_invest_path %>
