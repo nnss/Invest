@@ -16,7 +16,7 @@
   <tbody>
     <% @invests.each do |invest| %>
       <tr>
-        <td><%= invest.user %></td>
+        <td><% unless invest.user.nil? %><%= invest.user.name %><% else %>unknown<% end %></td>
         <td><%= invest.bank %></td>
         <td><%= invest.name %></td>
         <td><%= invest.amount %></td>
