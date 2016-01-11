@@ -7,6 +7,7 @@ class InvestsController < ApplicationController
   # GET /invests
   # GET /invests.json
   def index
+    @current_user = current_user if current_user
     logger.debug "898qqq I got #{@current_user}"
     @invests = Invest.all
   end

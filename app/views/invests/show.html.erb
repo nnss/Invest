@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <strong>User:</strong>
   <% unless @invest.user.nil? %>
@@ -22,6 +23,11 @@
 <p>
   <strong>Amount:</strong>
   <%= @invest.amount %>
+</p>
+
+<p>
+  <strong>Creation date:</strong>
+  <%= @invest.created_at %>
 </p>
 
 <%= link_to 'Edit', edit_invest_path(@invest) %> |

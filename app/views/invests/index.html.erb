@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
 <h1>Listing Invests</h1>
+
+<div>
+<%= line_chart Invest.where("user_id = ? and date(created_at) >= ?",@current_user,Date.today-1.week).pluck("date(created_at) as created_at, amount"), min: nil %>
+<div>
 
 <table>
   <thead>
