@@ -42,3 +42,5 @@ end
 
 gem "chartkick"
 gem 'groupdate'
+gem 'zepto-for-rails'  #, '~>1.1.6'
+

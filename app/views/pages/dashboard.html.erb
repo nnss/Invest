@@ -1,0 +1,19 @@
+<% content_for :title do %>About<% end %>
+
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "zepto.min.js" %>
+
+<h3>About the Website</h3>
+<p>
+This web application was created with
+<%= link_to('Rails Composer', 'http://railsapps.github.io/rails-composer/') %>
+from the <%= link_to('RailsApps project', 'http://railsapps.github.io/') %>.
+</p>
+
+<!-- %= line_chart Invest.where("user_id = ? and date(created_at) >= ?",@current_user,Date.today-1.month).pluck("date(created_at) as created_at, amount"), min: nil % -->
+
+<div>
+<%= line_chart  charts_glist_path(current_user,"month"), min: nil %>
+<div>
+

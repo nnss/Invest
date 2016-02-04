@@ -39,6 +39,6 @@ test:
   <<: *default
   database: invest_test
 
-production2:
+production:
   <<: *default
   database: invest_prod

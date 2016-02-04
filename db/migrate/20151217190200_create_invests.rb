@@ -4,7 +4,7 @@ class CreateInvests < ActiveRecord::Migration
       t.references :user, index: true, foreign_key: true
       t.string :bank
       t.string :name
-      t.float :amount
+      t.decimal :amount, precision: 20, scale: 2
 
       t.timestamps null: false
     end

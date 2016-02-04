@@ -31,6 +31,9 @@
         <%= f.password_field :current_password, class: 'form-control' %>
       </div>
     </fieldset>
+    <div class="form-group">
+      <p>Token: <%= @user.auth_token if @user.auth_token %></p>
+    </div>
     <%= f.submit 'Update', :class => 'button right' %>
   <% end %>
 </div>
