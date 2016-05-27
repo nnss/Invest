@@ -9,7 +9,7 @@
 <!-- Invest.where("user_id = ? and date(created_at) >= ?",@current_user,Date.today-1.week).pluck("date(created_at) as created_at, amount"), min: nil  -->
 
 <div>
-<%= line_chart  charts_glist_path("week"), min: nil %>
+<%= line_chart charts_glist_path(@current_user,"week"), min: nil %>
 <div>
 
 <table>
