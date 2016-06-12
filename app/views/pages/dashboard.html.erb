@@ -1,19 +1,76 @@
-<% content_for :title do %>About<% end %>
+<% content_for :title do %>Dashboard for <%= current_user.name %><% end %>
 
-<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-<%= javascript_include_tag "application" %>
-<%= javascript_include_tag "zepto.min.js" %>
+<!-- %= javascript_include_tag "//www.google.com/jsapi", "chartkick" % -->
+<!-- %= javascript_include_tag "application" % -->
+<!-- %= javascript_include_tag "zepto.min.js" % -->
 
-<h3>About the Website</h3>
-<p>
-This web application was created with
-<%= link_to('Rails Composer', 'http://railsapps.github.io/rails-composer/') %>
-from the <%= link_to('RailsApps project', 'http://railsapps.github.io/') %>.
-</p>
+<h3>Dashboard for <%= current_user.name %></h3>
+<h1><a class="toogle-trigger">Amount chart</a></h1>
+<div class="toogle-wrap" id="myGraph" style="display: none;">
+Amount graphic should be here, contact site admin
+</div>
 
-<!-- %= line_chart Invest.where("user_id = ? and date(created_at) >= ?",@current_user,Date.today-1.month).pluck("date(created_at) as created_at, amount"), min: nil % -->
-
-<div>
-<%= line_chart  charts_glist_path(current_user,"month"), min: nil %>
-<div>
-
+<script>
+$(document).ready(function() {
+  $(".toogle-trigger").click(function() {
+    $(this).parent().nextAll('.toogle-wrap').first().toggle('slow');
+  });
+    var url  =  "http://<%= request.env['SERVER_NAME'] %>:<%= request.env["SERVER_PORT"] %>/charts/glist/<%= current_user.id %>/year";
+    var options = {
+        chart: {
+            //renderTo: "myGraph",
+            //type: 'spline'
+        },
+        yAxis: {
+            allowDecimals: true,
+            title: {
+                text: 'Amount'
+            }
+        },
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                rotation: 45,
+                align: 'left'
+            },
+        },
+        rangeSelector: {
+           buttons: [{
+	           type: 'month',
+	           count: 1,
+	           text: '1m'
+           }, {
+	           type: 'month',
+	           count: 3,
+	           text: '3m'
+           }, {
+	           type: 'month',
+	           count: 6,
+	           text: '6m'
+           }, {
+	           type: 'ytd',
+	           text: 'YTD'
+           }, {
+	           type: 'year',
+	           count: 1,
+	           text: '1y'
+           }, {
+	           type: 'all',
+	           text: 'All'
+           }],
+           selected: 0,
+        },
+        title: {
+            text: 'Amount over time'
+        },
+        series: []
+    };
+    //console.debug("renderTo: " + options.chart.renderTo);
+    //var url =  "http://<%= request.env['REQUEST_URI'] %>/charts/glist/<%= current_user %>/week";
+    $.getJSON(url,  function(data) {
+       options.series = data;
+       // var chart = new Highcharts.StockChart(options);
+      $('#myGraph').highcharts('StockChart',options);
+    });
+});
+</script>

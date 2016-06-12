@@ -1,3 +1,14 @@
+require 'date'
+
+class BigDecimal
+  def as_json(options = nil) #:nodoc:
+    if finite?
+      self
+    else
+      NilClass::AS_JSON
+    end
+  end
+end
 class ChartsController < ApplicationController
   def glist
      part = params[:part]
@@ -13,11 +24,13 @@ class ChartsController < ApplicationController
   def week_glist
     res = {}
     res2 = []
-    Invest.where("user_id = ? and date(created_at) >= ?",@current_user,Date.today-1.week).group("name,created_at").pluck("date(created_at) as created_at, amount, name").map do |n,v,a|
+    Invest.where("user_id = ? and date(created_at) >= ?",@current_user,Date.today-1.week).group("name,date(created_at)").pluck("date(created_at) as created_at, amount, name").map do |n,v,a|
         res[a] = Array.new() if res[a].nil?
-        res[a] << [n,v]
+        #logger.debug("got #{Date.parse(n.to_s).to_time.to_i}")
+        #res[a] << [n,v.to_f]
+        res[a] << [ (Date.parse(n.to_s).to_time.to_i * 1000),v.to_f]
    end
-   res.each_pair{|k,v| res2<<{name: k, data: v}}
+   res.each_pair{|k,v| res2<< {"name": k, data: v}}
    render json: res2
   end
 
@@ -26,7 +39,8 @@ class ChartsController < ApplicationController
     res2 = []
     Invest.where("user_id = ? and date(created_at) >= ?",@current_user,Date.today-1.year).group("name,created_at").pluck("date(created_at) as created_at, amount, name").map do |n,v,a|
         res[a] = Array.new() if res[a].nil?
-        res[a] << [n,v]
+        #res[a] << [n,v]
+        res[a] << [ (Date.parse(n.to_s).to_time.to_i * 1000),v.to_f]
    end
    res.each_pair{|k,v| res2<<{name: k, data: v}}
    render json: res2
@@ -37,7 +51,8 @@ class ChartsController < ApplicationController
     res2 = []
     Invest.where("user_id = ? and date(created_at) >= ?",@current_user,Date.today-1.month).group("name,created_at").pluck("date(created_at) as created_at, amount, name").map do |n,v,a|
         res[a] = Array.new() if res[a].nil?
-        res[a] << [n,v]
+        #res[a] << [n,v]
+        res[a] << [ (Date.parse(n.to_s).to_time.to_i * 1000),v.to_f]
    end
    res.each_pair{|k,v| res2<<{name: k, data: v}}
    render json: res2

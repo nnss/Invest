@@ -2,20 +2,26 @@ include ActionController::HttpAuthentication::Token::ControllerMethods
 
 class InvestsController < ApplicationController
   before_action :authenticate
+  #before_action :authenticate_user!
   before_action :set_invest, only: [:show, :edit, :update, :destroy]
 
   # GET /invests
   # GET /invests.json
   def index
-    @current_user = current_user if current_user
-    logger.debug "898qqq I got #{@current_user}"
+    #@current_user = current_user if current_user
+    if current_user
+      @current_user = current_user
+    else
+      #@current_user = anon_user
+    end
+    #logger.debug "898qqq I got #{@current_user}"
     @invests = Invest.all
   end
 
   # GET /invests/1
   # GET /invests/1.json
   def show
-    logger.debug "qqq I got #{current_user}"
+    #logger.debug "qqq I got #{current_user}"
   end
 
   # GET /invests/new
@@ -75,6 +81,8 @@ class InvestsController < ApplicationController
           @current_user = User.find_by(auth_token: token)
           @current_user
         end
+      else
+        authenticate_user!
       end
     end
     # Use callbacks to share common setup or constraints between actions.

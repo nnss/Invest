@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+#ruby '2.2.4'
 gem 'rails', '4.2.5'
 gem 'sqlite3'
 gem 'mysql2'
@@ -14,7 +14,7 @@ group :development, :test do
 end
 group :development do
   gem 'web-console', '~> 2.0'
-  gem 'spring'
+  gem 'spring', "~>1.3.3"
 end
 gem 'bootstrap-sass'
 gem 'devise'
@@ -40,7 +40,9 @@ group :development, :test do
 end
 
 
-gem "chartkick"
+#gem "chartkick"
+gem "highcharts-rails"
+gem "highstock-rails"
 gem 'groupdate'
 gem 'zepto-for-rails'  #, '~>1.1.6'
 

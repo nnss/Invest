@@ -15,4 +15,13 @@
 //= require zepto
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require highstock
+//= require highstock/highcharts-more
+// // = require highcharts
+// // = require highcharts/highcharts-more
+// // = require highcharts/modules/annotations
+// // = require highcharts/modules/data
+// // = require highcharts/modules/exporting
+// // = require highcharts/modules/no-data-to-display
+// // = require highcharts/themes/dark-blue
 //= require_tree .
