@@ -14,8 +14,10 @@ default: &default
   host: <%= ENV["DB_HOST"] %>
   username: <%= ENV["DB_USER"] %>
   password: <%= ENV["DB_PASS"] %>
-  encoding: utf8mb4
-  collation: utf8mb4_bin
+  #encoding: utf8mb4
+  #collation: utf8mb4_bin
+  encoding: utf8
+  collation: utf8_general_ci
 
 development2:
   <<: *default
@@ -24,8 +26,10 @@ development2:
 development:
   <<: *default
   database: invest_dev
-  encoding: utf8mb4
-  collation: utf8mb4_bin
+  #encoding: utf8mb4
+  #collation: utf8mb4_bin
+  encoding: utf8
+  collation: utf8_general_ci
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

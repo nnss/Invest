@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20151217190950) do
     t.integer  "user_id",    limit: 4
     t.string   "bank",       limit: 255
     t.string   "name",       limit: 255
-    t.decimal    "amount",     limit: 24
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.decimal  "amount",                 precision: 20, scale: 2
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "invests", ["user_id"], name: "index_invests_on_user_id", using: :btree

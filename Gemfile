@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
-#ruby '2.2.4'
-gem 'rails', '4.2.5'
+ruby '~> 2.2.4'
+#security# gem 'rails', '4.2.5'
+gem 'rails', '~> 4.2.7.1'
 gem 'sqlite3'
-gem 'mysql2'
+gem 'mysql2', '< 0.5'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -36,13 +37,22 @@ gem 'foreman'
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
-  gem 'rubocop'
+  gem 'rubocop', '~> 0.49.0'
 end
+
+# security warnings
+gem 'rails-html-sanitizer', '~> 1.0.4'
+gem 'actionview', '~> 4.2.7.1'
+gem 'activerecord', '~> 4.2.7.1'
+gem 'loofah', '~> 2.2.1'
+gem 'nokogiri', '~> 1.8.1'
+
+
 
 
 #gem "chartkick"
-gem "highcharts-rails"
-gem "highstock-rails"
+#gem "highcharts-rails"
+#gem "highstock-rails"
 gem 'groupdate'
 gem 'zepto-for-rails'  #, '~>1.1.6'
 
